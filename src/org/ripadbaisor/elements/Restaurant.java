@@ -1,6 +1,6 @@
 package org.ripadbaisor.elements;
 
-public class Restaurant {
+public class Restaurant implements Comparable<Restaurant> {
     
     private String name;
     private String location;
@@ -50,5 +50,19 @@ public class Restaurant {
     private static String repeatChar(char c, int n) {
 
         return String.valueOf(c).repeat(Math.max(0, n));    
+    }
+
+    @Override
+    public int compareTo(Restaurant otherRestaurant) {
+
+        if (this.rating > otherRestaurant.rating) {
+            return -1;
+        }
+
+        if (this.rating < otherRestaurant.rating) {
+            return 1;
+        }
+
+        return 0;
     }
 }
