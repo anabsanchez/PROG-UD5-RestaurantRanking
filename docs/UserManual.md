@@ -26,7 +26,7 @@ Welcome to RestaurantRanking! This user manual will guide you through the steps 
 
    - Select the first option from the main menu to add a restaurant.
 
-   ![option1](/images/option1.png)
+   ![option1](/images/op1/option1.png)
 
    - Enter the restaurant's name, location, hours, and rating as requested.
 
