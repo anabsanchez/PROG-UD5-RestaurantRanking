@@ -79,7 +79,7 @@ public class Menu {
                                            JOptionPane.PLAIN_MESSAGE);
     }
 
-    private static boolean edit(String option, Restaurant restaurant) {
+    private static boolean edit(String option, Restaurant restaurant) throws IllegalArgumentException {
 
         switch (option.trim().toUpperCase()) {
             case "1":
@@ -127,7 +127,11 @@ public class Menu {
     
     private static void showRestaurants(Manager manager) {
         
-        JOptionPane.showMessageDialog(null, manager.getRanking(), "Restaurantes", JOptionPane.PLAIN_MESSAGE);
+        try {
+            JOptionPane.showMessageDialog(null, manager.getRanking(), "Restaurantes", JOptionPane.PLAIN_MESSAGE);
+        } catch (IllegalArgumentException iae) {
+            JOptionPane.showMessageDialog(null, iae.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private static void removeRestaurant(Manager manager) {

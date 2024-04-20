@@ -35,7 +35,11 @@ public class Manager {
         return null;
     }
 
-    public String getRanking() {
+    public String getRanking() throws IllegalArgumentException {
+
+        if (this.restaurants.isEmpty()) {
+            throw new IllegalArgumentException("Actualmente, no existen restaurantes\nen la base de datos para mostrar.");
+        }
 
         Collections.sort(this.restaurants);
         StringBuilder ranking = new StringBuilder();
