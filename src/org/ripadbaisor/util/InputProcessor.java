@@ -20,7 +20,7 @@ public class InputProcessor {
 
     private static String validateText(String text) {
 
-        if (text.isEmpty()) {
+        if (text == null || text.isEmpty()) {
             throw new IllegalArgumentException("Por favor, introduzca los datos solicitados.");
         }
 
@@ -43,6 +43,10 @@ public class InputProcessor {
     private static double validateRating(String ratingString) {
 
         try {
+            if (ratingString == null || ratingString.isEmpty()) {
+                throw new IllegalArgumentException("Por favor, introduzca los datos solicitados.");
+            }
+
             double rating = Double.parseDouble(ratingString);
 
             if (rating < 0 || rating > 5) {
@@ -69,6 +73,10 @@ public class InputProcessor {
     }
 
     private static String validateId(String id) {
+
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Por favor, introduzca los datos solicitados.");
+        }
 
         String idRegex = "\\d{5}";
 
