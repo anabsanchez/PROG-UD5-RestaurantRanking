@@ -103,25 +103,25 @@ public class Menu {
 
     private static void changeName(Restaurant restaurant) {
         String newName = InputProcessor.requestText("Nombre actual: " + restaurant.getName() + "\nNuevo nombre:",
-                                              "Editar restaurante");
+                                                    "Editando Restaurante " + restaurant.getName());
         restaurant.setName(newName);                                                     
     }
 
     private static void changeLocation(Restaurant restaurant) {
         String newLocation = InputProcessor.requestText("Localización actual: " + restaurant.getLocation() + "\nNueva localización:",
-                                                  "Editar restaurante");
+                                                        "Editando Restaurante " + restaurant.getName());
         restaurant.setLocation(newLocation);                                                     
     }
 
     private static void changeHours(Restaurant restaurant) {
         String newHours = InputProcessor.requestText("Horario actual: " + restaurant.getHours() + "\nNuevo horario:",
-                                               "Editar restaurante");
+                                                     "Editando Restaurante " + restaurant.getName());
         restaurant.setHours(newHours);                                                     
     }
 
     private static void changeRating(Restaurant restaurant) {
         double newRating = InputProcessor.requestRating("Puntuación actual: " + restaurant.getRating() + "\nNueva puntuación:",
-                                                  "Editar restaurante");
+                                                        "Editando Restaurante " + restaurant.getName());
         restaurant.setRating(newRating);                                                     
     }
     
@@ -136,8 +136,18 @@ public class Menu {
 
     private static void removeRestaurant(Manager manager) {
         
-        String id = InputProcessor.requestId("Número de identificación:", "Eliminar restaurante");
-        
-        manager.removeRestaurant(id);
+        try {
+            if (manager.isEmpty()) {
+                throw new IllegalArgumentException("La base de datos se encuentra vacía.");
+            }
+
+            String id = InputProcessor.requestId("Número de identificación:", "Eliminar restaurante");
+            
+            if (!manager.removeRestaurant(id)) {
+                throw new IllegalArgumentException("No se ha encontrado un restaurante\ncon código " + id + ".");
+            }
+        } catch (IllegalArgumentException iae) {
+            JOptionPane.showMessageDialog(null, iae.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

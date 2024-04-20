@@ -38,7 +38,7 @@ public class Manager {
     public String getRanking() throws IllegalArgumentException {
 
         if (this.restaurants.isEmpty()) {
-            throw new IllegalArgumentException("Actualmente, no existen restaurantes\nen la base de datos para mostrar.");
+            throw new IllegalArgumentException("La base de datos se encuentra vacía.");
         }
 
         Collections.sort(this.restaurants);
@@ -49,5 +49,10 @@ public class Manager {
         }
 
         return ranking.toString();
+    }
+
+    public boolean isEmpty() {
+
+        return this.restaurants.isEmpty();
     }
 }
