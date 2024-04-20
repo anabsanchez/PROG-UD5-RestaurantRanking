@@ -51,14 +51,22 @@ public class Menu {
     
     private static void alterRestaurant(Manager manager) {
         
-        String id = InputProcessor.requestId("Número de identificación:", "Editar restaurante");
-        Restaurant restaurant = manager.getRestaurant(id);
+        try {
+            String id = InputProcessor.requestId("Número de identificación:", "Editar restaurante");
+            Restaurant restaurant = manager.getRestaurant(id);
 
-        boolean keepEditing = true;
+            if (restaurant == null) {
+                throw new IllegalArgumentException("No se ha encontrado un restaurante\ncon código " + id + ".");
+            }
 
-        while (keepEditing) {
-            String option = showEditionMenu(restaurant);
-            keepEditing = edit(option, restaurant);
+            boolean keepEditing = true;
+
+            while (keepEditing) {
+                String option = showEditionMenu(restaurant);
+                keepEditing = edit(option, restaurant);
+            }
+        } catch (IllegalArgumentException iae) {
+            JOptionPane.showMessageDialog(null, iae.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
