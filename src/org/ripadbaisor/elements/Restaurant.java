@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Restaurant implements Comparable<Restaurant> {
     
-    private int id;
+    private String id;
     private String name;
     private String location;
     private String hours;
@@ -19,7 +19,7 @@ public class Restaurant implements Comparable<Restaurant> {
         this.rating = rating;
     }
 
-    private int generateId() {
+    private String generateId() {
     
         Random random = new Random();
         String id = "";
@@ -28,7 +28,11 @@ public class Restaurant implements Comparable<Restaurant> {
             id += random.nextInt(0, 10);
         }
 
-        return Integer.parseInt(id);
+        return id;
+    }
+
+    public String getId() {
+        return this.id;
     }
 
     @Override
@@ -37,6 +41,7 @@ public class Restaurant implements Comparable<Restaurant> {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(header(this.name, '_'))
+                     .append("\nNº de identificación: ").append(this.id)
                      .append("\nLocalización: ").append(this.location)
                      .append("\nHorario: ").append(this.hours)
                      .append("\nPuntuación: ").append(this.rating)

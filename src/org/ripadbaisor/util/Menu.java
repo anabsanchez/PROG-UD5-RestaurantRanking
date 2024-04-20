@@ -61,6 +61,8 @@ public class Menu {
 
     private static void removeRestaurant(Manager manager) {
         
+        String id = InputProcessor.requestId("Número de identificación:", "Eliminar restaurante");
         
+        manager.removeRestaurant(id);
     }
 }
