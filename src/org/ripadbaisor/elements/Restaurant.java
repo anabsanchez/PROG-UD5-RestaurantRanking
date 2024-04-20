@@ -34,12 +34,13 @@ public class Restaurant implements Comparable<Restaurant> {
     @Override
     public String toString() {
 
-        StringBuilder stringBuilder = new StringBuilder("\n");
+        StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(header(this.name, '_'))
                      .append("\nLocalización: ").append(this.location)
                      .append("\nHorario: ").append(this.hours)
-                     .append("\nPuntuación: ").append(this.rating);
+                     .append("\nPuntuación: ").append(this.rating)
+                     .append("\n");
 
         return stringBuilder.toString();
     }
@@ -52,9 +53,9 @@ public class Restaurant implements Comparable<Restaurant> {
         int sidesLength = (45 - titleLength) / 2;
 
         header.append(repeatChar(c, 45)).append("\n")
-              .append(repeatChar(c, sidesLength - 2)).append("  ")
+              .append(repeatChar(c, sidesLength - 1)).append("  ")
               .append(title)
-              .append("  ").append(repeatChar(c, sidesLength - 2));
+              .append("  ").append(repeatChar(c, sidesLength - 1));
 
         if ((45 - titleLength - 8) % 2 == 1) {
             header.append(c);

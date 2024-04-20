@@ -1,6 +1,7 @@
 package org.ripadbaisor.util;
 
 import org.ripadbaisor.elements.Manager;
+import org.ripadbaisor.elements.Restaurant;
 
 import javax.swing.JOptionPane;
 
@@ -37,22 +38,28 @@ public class Menu {
         }
     }
 
-    private static void removeRestaurant(Manager manager) {
+    private static void addRestaurant(Manager manager) {
         
-        
-    }
+        String name = InputProcessor.requestText("Nombre:", "Nuevo restaurante");
+        String location = InputProcessor.requestText("Localización:", name);
+        String hours = InputProcessor.requestText("Horario:", name);
+        double rating = InputProcessor.requestRating("Puntuación:", name);
 
-    private static void showRestaurants(Manager manager) {
-        
-        
+        Restaurant newRestaurant = new Restaurant(name, location, hours, rating);
+        manager.addRestaurant(newRestaurant);
     }
-
+    
     private static void alterRestaurant(Manager manager) {
         
         
     }
+    
+    private static void showRestaurants(Manager manager) {
+        
+        JOptionPane.showMessageDialog(null, manager.getRanking(), "Restaurantes", JOptionPane.PLAIN_MESSAGE);
+    }
 
-    private static void addRestaurant(Manager manager) {
+    private static void removeRestaurant(Manager manager) {
         
         
     }
