@@ -7,13 +7,20 @@ import javax.swing.JOptionPane;
 
 public class Menu {
     
-    public static String showMenu() {
+    public static String showMenu() throws IllegalArgumentException {
 
-        return JOptionPane.showInputDialog(null,
-                                           "1. Añadir restaurante.\n2. Editar restaurante.\n" +
-                                           "3. Mostrar restaurantes.\n4. Eliminar restaurante.\nQ. Salir del programa.",
-                                           "Menú de opciones",
-                                           JOptionPane.PLAIN_MESSAGE);
+        
+        String option = JOptionPane.showInputDialog(null,
+                                        "1. Añadir restaurante.\n2. Editar restaurante.\n" +
+                                        "3. Mostrar restaurantes.\n4. Eliminar restaurante.\nQ. Salir del programa.",
+                                        "Menú de opciones",
+                                        JOptionPane.PLAIN_MESSAGE);
+
+        if (option == null || option.isEmpty()) {
+            throw new IllegalArgumentException("Debe elegir alguna de las opciones\ndel menú proporcionado.");
+        }
+
+        return option;                                   
     }
 
     public static void performAction(String option, Manager manager) {
@@ -95,6 +102,7 @@ public class Menu {
                 changeRating(restaurant);
                 return true;
             case "Q": // Salir del menú de edición
+                JOptionPane.showMessageDialog(null, "Cambios guardados.", "Mensaje de confirmación", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             default: // Opción no válida
                 throw new IllegalArgumentException("Debe introducir una opción válida.");
@@ -146,6 +154,8 @@ public class Menu {
             if (!manager.removeRestaurant(id)) {
                 throw new IllegalArgumentException("No se ha encontrado un restaurante\ncon código " + id + ".");
             }
+
+            JOptionPane.showMessageDialog(null, "Restaurante eliminado.", "Mensaje de confirmación", JOptionPane.INFORMATION_MESSAGE);
         } catch (IllegalArgumentException iae) {
             JOptionPane.showMessageDialog(null, iae.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
