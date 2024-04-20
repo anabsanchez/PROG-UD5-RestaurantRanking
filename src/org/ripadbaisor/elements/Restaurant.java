@@ -1,7 +1,10 @@
 package org.ripadbaisor.elements;
 
+import java.util.Random;
+
 public class Restaurant implements Comparable<Restaurant> {
     
+    private int id;
     private String name;
     private String location;
     private String hours;
@@ -9,10 +12,23 @@ public class Restaurant implements Comparable<Restaurant> {
 
     public Restaurant(String name, String location, String hours, double rating) {
 
+        this.id = generateId();
         this.name = name;
         this.hours = hours;
         this.location = location;
         this.rating = rating;
+    }
+
+    private int generateId() {
+    
+        Random random = new Random();
+        String id = "";
+
+        for (int i = 0; i < 5; i++) {
+            id += random.nextInt(0, 10);
+        }
+
+        return Integer.parseInt(id);
     }
 
     @Override
