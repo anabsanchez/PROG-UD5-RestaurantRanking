@@ -24,7 +24,7 @@ public class Manager {
         return this.restaurants.remove(restaurant);
     }
 
-    private Restaurant getRestaurant(String id) {
+    public Restaurant getRestaurant(String id) {
 
         for (Restaurant restaurant : this.restaurants) {
             if (restaurant.getId().equals(id)) {

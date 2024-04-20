@@ -35,6 +35,46 @@ public class Restaurant implements Comparable<Restaurant> {
         return this.id;
     }
 
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
+    }
+
+    public String getHours() {
+
+        return this.hours;
+    }
+
+    public void setHours(String hours) {
+
+        this.hours = hours;
+    }
+
+    public String getLocation() {
+
+        return this.location;
+    }
+
+    public void setLocation(String location) {
+
+        this.location = location;
+    }
+
+    public double getRating() {
+
+        return this.rating;
+    }
+
+    public void setRating(double rating) {
+
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
 
