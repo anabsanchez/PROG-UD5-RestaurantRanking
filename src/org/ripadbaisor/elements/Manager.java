@@ -17,9 +17,22 @@ public class Manager {
         this.restaurants.add(restaurant);
     }
 
-    public boolean removeRestaurant(Restaurant restaurant) {
+    public boolean removeRestaurant(String id) {
+
+        Restaurant restaurant = this.getRestaurant(id);
 
         return this.restaurants.remove(restaurant);
+    }
+
+    public Restaurant getRestaurant(String id) {
+
+        for (Restaurant restaurant : this.restaurants) {
+            if (restaurant.getId().equals(id)) {
+                return restaurant;
+            }
+        }
+
+        return null;
     }
 
     public String getRanking() {

@@ -1,6 +1,7 @@
 package org.ripadbaisor.util;
 
 import org.ripadbaisor.elements.Manager;
+import org.ripadbaisor.elements.Restaurant;
 
 import javax.swing.JOptionPane;
 
@@ -37,23 +38,94 @@ public class Menu {
         }
     }
 
-    private static void removeRestaurant(Manager manager) {
-        
-        
-    }
-
-    private static void showRestaurants(Manager manager) {
-        
-        
-    }
-
-    private static void alterRestaurant(Manager manager) {
-        
-        
-    }
-
     private static void addRestaurant(Manager manager) {
         
+        String name = InputProcessor.requestText("Nombre:", "Nuevo restaurante");
+        String location = InputProcessor.requestText("Localización:", name);
+        String hours = InputProcessor.requestText("Horario:", name);
+        double rating = InputProcessor.requestRating("Puntuación:", name);
+
+        Restaurant newRestaurant = new Restaurant(name, location, hours, rating);
+        manager.addRestaurant(newRestaurant);
+    }
+    
+    private static void alterRestaurant(Manager manager) {
         
+        String id = InputProcessor.requestId("Número de identificación:", "Editar restaurante");
+        Restaurant restaurant = manager.getRestaurant(id);
+
+        boolean keepEditing = true;
+
+        while (keepEditing) {
+            String option = showEditionMenu(restaurant);
+            keepEditing = edit(option, restaurant);
+        }
+    }
+
+    private static String showEditionMenu(Restaurant restaurant) {
+
+        return JOptionPane.showInputDialog(null,
+                                           "1. Nombre.\n2. Localización.\n" +
+                                           "3. Horario.\n4. Puntuación.\nQ. Confirmar cambios y volver.",
+                                           "Menú de edición - " + restaurant.getName(),
+                                           JOptionPane.PLAIN_MESSAGE);
+    }
+
+    private static boolean edit(String option, Restaurant restaurant) {
+
+        switch (option.trim().toUpperCase()) {
+            case "1":
+                changeName(restaurant);
+                return true;
+            case "2":
+                changeLocation(restaurant);
+                return true;
+            case "3":
+                changeHours(restaurant);
+                return true;
+            case "4":
+                changeRating(restaurant);
+                return true;
+            case "Q": // Salir del menú de edición
+                return false;
+            default: // Opción no válida
+                throw new IllegalArgumentException("Debe introducir una opción válida.");
+        }
+    }
+
+    private static void changeName(Restaurant restaurant) {
+        String newName = InputProcessor.requestText("Nombre actual: " + restaurant.getName() + "\nNuevo nombre:",
+                                              "Editar restaurante");
+        restaurant.setName(newName);                                                     
+    }
+
+    private static void changeLocation(Restaurant restaurant) {
+        String newLocation = InputProcessor.requestText("Localización actual: " + restaurant.getLocation() + "\nNueva localización:",
+                                                  "Editar restaurante");
+        restaurant.setLocation(newLocation);                                                     
+    }
+
+    private static void changeHours(Restaurant restaurant) {
+        String newHours = InputProcessor.requestText("Horario actual: " + restaurant.getHours() + "\nNuevo horario:",
+                                               "Editar restaurante");
+        restaurant.setHours(newHours);                                                     
+    }
+
+    private static void changeRating(Restaurant restaurant) {
+        double newRating = InputProcessor.requestRating("Puntuación actual: " + restaurant.getRating() + "\nNueva puntuación:",
+                                                  "Editar restaurante");
+        restaurant.setRating(newRating);                                                     
+    }
+    
+    private static void showRestaurants(Manager manager) {
+        
+        JOptionPane.showMessageDialog(null, manager.getRanking(), "Restaurantes", JOptionPane.PLAIN_MESSAGE);
+    }
+
+    private static void removeRestaurant(Manager manager) {
+        
+        String id = InputProcessor.requestId("Número de identificación:", "Eliminar restaurante");
+        
+        manager.removeRestaurant(id);
     }
 }
